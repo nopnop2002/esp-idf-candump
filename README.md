@@ -23,7 +23,7 @@ make menuconfig
 make flash
 ```
 
-# Change Bit Rate   
+# Adjust Bit Rate   
 You have to adjust your bit rate.   
 
 ```
