@@ -12,7 +12,7 @@ CAN Bus Transceiver like SN65HVD230.
 |CTX|--|GPIO21||
 |CRX|--|GPIO23||
 |CANH|--||To CAN Bus|
-|CANL|--||To Can Bus|
+|CANL|--||To CAN Bus|
 
 
 
@@ -23,5 +23,5 @@ make menuconfig
 make flash
 ```
 
-![config](https://user-images.githubusercontent.com/6020549/56449085-4f458380-6350-11e9-95f8-8583c3f78e80.jpg)
+![esp-idf-candump](https://user-images.githubusercontent.com/6020549/57578347-6990fe00-74c5-11e9-9fb8-30569c723ab6.jpg)
 
