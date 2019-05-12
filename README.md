@@ -23,5 +23,13 @@ make menuconfig
 make flash
 ```
 
+# Change Bit Rate   
+You have to adjust your bit rate.   
+
+```
+static const can_timing_config_t t_config = CAN_TIMING_CONFIG_250KBITS();   
+```
+
+
 ![esp-idf-candump](https://user-images.githubusercontent.com/6020549/57578347-6990fe00-74c5-11e9-9fb8-30569c723ab6.jpg)
 
