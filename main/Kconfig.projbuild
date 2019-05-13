@@ -1,0 +1,42 @@
+menu "CAN DEMO Configuration"
+
+    choice CAN_BITRATE
+        prompt "CAN Bitrate"
+        default CAN_BITRATE_100
+        help
+            Select the CAN bitrate for the example.
+        config CAN_BITRATE_25
+            bool "BITRATE_25"
+            help
+                CAN bitrate is 25 Kbit/s.
+        config CAN_BITRATE_50
+            bool "BITRATE_50"
+            help
+                CAN bitrate is 50 Kbit/s.
+        config CAN_BITRATE_100
+            bool "BITRATE_100"
+            help
+                CAN bitrate is 100 Kbit/s.
+        config CAN_BITRATE_125
+            bool "BITRATE_125"
+            help
+                CAN bitrate is 125 Kbit/s.
+        config CAN_BITRATE_250
+            bool "BITRATE_250"
+            help
+                CAN bitrate is 250 Kbit/s.
+        config CAN_BITRATE_500
+            bool "BITRATE_500"
+            help
+                CAN bitrate is 500 Kbit/s.
+        config CAN_BITRATE_800
+            bool "BITRATE_800"
+            help
+                CAN bitrate is 800 Kbit/s.
+        config CAN_BITRATE_1000
+            bool "BITRATE_1000"
+            help
+                CAN bitrate is 1 Mbit/s.
+    endchoice
+
+endmenu

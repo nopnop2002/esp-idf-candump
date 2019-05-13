@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := can_network_listen_only
+PROJECT_NAME := candump
 
 include $(IDF_PATH)/make/project.mk
 

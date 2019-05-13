@@ -3,6 +3,7 @@ Example code for CAN DUMP using ESP-IDF.
 
 # Hardware requirement    
 CAN Bus Transceiver like SN65HVD230.   
+If you have only 2 node, terminator register.   
 
 # Wirering for CAN Bus Transceiver   
 |Transceiver||ESP-32||
@@ -24,12 +25,11 @@ make flash
 ```
 
 # Adjust Bit Rate   
-You have to adjust your bit rate.   
+You have to adjust your bit rate using menuconfig.   
 
-```
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_250KBITS();   
-```
+![candump-1](https://user-images.githubusercontent.com/6020549/57606049-0b3a4d00-75a3-11e9-8efd-688ead135bb3.jpg)
+![candump-2](https://user-images.githubusercontent.com/6020549/57606051-0b3a4d00-75a3-11e9-8bd3-4169e181a782.jpg)
+![candump-3](https://user-images.githubusercontent.com/6020549/57606052-0bd2e380-75a3-11e9-99d4-9e2008c29fd4.jpg)
 
-
-![esp-idf-candump](https://user-images.githubusercontent.com/6020549/57578347-6990fe00-74c5-11e9-9fb8-30569c723ab6.jpg)
+![candump-4](https://user-images.githubusercontent.com/6020549/57606053-0bd2e380-75a3-11e9-91ee-a52d892fcaff.jpg)
 
