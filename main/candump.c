@@ -1,4 +1,4 @@
-/* CAN Network Listen Only Example
+/* CAN Network receive all data Example
 
    This example code is in the Public Domain (or CC0 licensed, at your option.)
 
