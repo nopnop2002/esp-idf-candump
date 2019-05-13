@@ -2,8 +2,8 @@
 Example code for CAN DUMP using ESP-IDF.   
 
 # Hardware requirement    
-CAN Bus Transceiver like SN65HVD230.   
-If you have only 2 node, terminator register.   
+CAN Bus Transceiver like SN65HVD230/SN65HVD232.   
+Terminator register, If you have only 2 node.   
 
 # Wirering for CAN Bus Transceiver   
 |Transceiver||ESP-32||
