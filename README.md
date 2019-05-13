@@ -1,5 +1,5 @@
 # esp-idf-candump
-Example code for CAN DUMP using ESP-IDF.   
+Example code for CAN receive using ESP-IDF.   
 
 # Hardware requirement    
 CAN Bus Transceiver like SN65HVD230/SN65HVD232.   
