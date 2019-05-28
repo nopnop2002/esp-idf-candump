@@ -19,10 +19,10 @@
 
 /* --------------------- Definitions and static variables ------------------ */
 //Example Configuration
-#define RX_TASK_PRIO					9
-#define TX_GPIO_NUM 					21
-#define RX_GPIO_NUM 					22
-#define EXAMPLE_TAG 					"CANDUMP"
+#define RX_TASK_PRIO	9
+#define TX_GPIO_NUM 	21
+#define RX_GPIO_NUM 	22
+#define EXAMPLE_TAG 	"CANDUMP"
 
 static const can_filter_config_t f_config = CAN_FILTER_CONFIG_ACCEPT_ALL();
 #if CONFIG_CAN_BITRATE_25
@@ -51,12 +51,13 @@ static const can_timing_config_t t_config = CAN_TIMING_CONFIG_1MBITS();
 #define BITRATE "Bitrate is 1 Mbit/s"
 #endif
 //Set TX queue length to 0 due to listen only mode
-static const can_general_config_t g_config = {.mode = CAN_MODE_LISTEN_ONLY,
-											  .tx_io = TX_GPIO_NUM, .rx_io = RX_GPIO_NUM,
-											  .clkout_io = CAN_IO_UNUSED, .bus_off_io = CAN_IO_UNUSED,
-											  .tx_queue_len = 0, .rx_queue_len = 5,
-											  .alerts_enabled = CAN_ALERT_NONE,
-											  .clkout_divider = 0};
+static const can_general_config_t g_config = 
+			{.mode = CAN_MODE_LISTEN_ONLY,
+			.tx_io = TX_GPIO_NUM, .rx_io = RX_GPIO_NUM,
+			.clkout_io = CAN_IO_UNUSED, .bus_off_io = CAN_IO_UNUSED,
+			.tx_queue_len = 0, .rx_queue_len = 5,
+			.alerts_enabled = CAN_ALERT_NONE,
+			.clkout_divider = 0};
 
 /* --------------------------- Tasks and Functions -------------------------- */
 
@@ -68,7 +69,7 @@ static void can_receive_task(void *arg)
 		can_message_t rx_msg;
 		can_receive(&rx_msg, portMAX_DELAY);
 		ESP_LOGI(pcTaskGetTaskName(0),"can_receive identifier=0x%x flags=0x%x data_length_code=%d",
-				 rx_msg.identifier, rx_msg.flags, rx_msg.data_length_code);
+			rx_msg.identifier, rx_msg.flags, rx_msg.data_length_code);
 		for (int i = 0; i < rx_msg.data_length_code; i++) {
 			printf("%02x ", rx_msg.data[i]);
 		}
