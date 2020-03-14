@@ -6,14 +6,16 @@ Example code for CAN receive using ESP-IDF.
 Terminator register, If you have only 2 node.   
 
 # Wirering for CAN Bus Transceiver   
-|Transceiver||ESP-32||
+|SN65HVD23x||ESP-32||
 |:-:|:-:|:-:|:-:|
-|VCC|--|3.3V||
+|D|--|GPIO21||
 |GND|--|GND||
-|CTX|--|GPIO21||
-|CRX|--|GPIO22||
-|CANH|--||To CAN Bus|
+|Vcc|--|3.3V||
+|R|--|GPIO22||
+|Vref|--||N/C|
 |CANL|--||To CAN Bus|
+|CANH|--||To CAN Bus|
+|RS|--||GND|
 
 # Test Circuit   
 ```
@@ -30,7 +32,7 @@ Terminator register, If you have only 2 node.
    +----------+ +----------+   |      |   
      |      |     |      |     |      |   
    +----------+ +----------+ +----------+ 
-   |          | |          | | Tx    Rx | 
+   |          | |          | | D      R | 
    |  MCP2551 | |  MCP2551 | |  VP230   | 
    | H      L | | H      L | | H      L | 
    +----------+ +----------+ +----------+ 
