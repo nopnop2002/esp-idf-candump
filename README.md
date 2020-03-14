@@ -15,7 +15,10 @@ Terminator register, If you have only 2 node.
 |Vref|--|N/C||
 |CANL|--||To CAN Bus|
 |CANH|--||To CAN Bus|
-|RS|--|GND||
+|RS|--|GND(*1)||
+
+(*1) N/C for SN65HVD232
+
 
 # Test Circuit   
 ```
