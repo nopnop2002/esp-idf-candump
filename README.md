@@ -2,7 +2,7 @@
 Example code for CAN receive using ESP-IDF.   
 
 # Hardware requirement    
-CAN Bus Transceiver like SN65HVD230/SN65HVD232.   
+3.3V CAN Bus Transceiver like SN65HVD230/231/232.   
 Terminator register, If you have only 2 node.   
 
 # Wirering for CAN Bus Transceiver   
@@ -11,12 +11,41 @@ Terminator register, If you have only 2 node.
 |VCC|--|3.3V||
 |GND|--|GND||
 |CTX|--|GPIO21||
-|CRX|--|GPIO23||
+|CRX|--|GPIO22||
 |CANH|--||To CAN Bus|
 |CANL|--||To CAN Bus|
 
+# Test Circuit   
+```
+    ----------   ----------   ----------  
+   |Atmega328 | |Atmega328 | |   ESP32  | 
+   |          | |          | |          | 
+   |          | |          | | 21    22 | 
+    ----------   ----------   ----------- 
+     |      |     |      |     |      |   
+    ----------   ----------    |      |   
+   |          | |          |   |      |   
+   |  MCP2515 | |  MCP2515 |   |      |   
+   |          | |          |   |      |   
+    ----------   ----------    |      |   
+     |      |     |      |     |      |   
+    ----------   ----------   ----------  
+   |          | |          | | Tx    Rx | 
+   |  MCP2551 | |  MCP2551 | |  VP230   | 
+   | H      L | | H      L | | H      L | 
+    ----------   ----------   ----------  
+     |      |     |      |     |      |   
+     |-^^^^-|     |      |     |-^^^^-|   
+     |      |     |      |     |      |   
+  |--x------|-----x------|-----x------|--| H
+            |            |            |
+  |---------x------------x------------x--| L
 
+      -^^^^-:Terminaror register
 
+```
+
+# Install   
 ```
 git clone https://github.com/nopnop2002/esp-idf-candump
 cd esp-idf-candump/
