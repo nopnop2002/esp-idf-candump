@@ -12,10 +12,10 @@ Terminator register, If you have only 2 node.
 |GND|--|GND||
 |Vcc|--|3.3V||
 |R|--|GPIO22||
-|Vref|--||N/C|
+|Vref|--|N/C||
 |CANL|--||To CAN Bus|
 |CANH|--||To CAN Bus|
-|RS|--||GND|
+|RS|--|GND||
 
 # Test Circuit   
 ```
