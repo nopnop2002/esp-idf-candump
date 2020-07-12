@@ -60,8 +60,8 @@ make menuconfig
 make flash
 ```
 
-# Adjust CAN Bitrate   
-You have to adjust your CAN bitrate using menuconfig.   
+# Set CAN Bitrate   
+You have to set your CAN bitrate using menuconfig.   
 
 ![candump-1](https://user-images.githubusercontent.com/6020549/57606049-0b3a4d00-75a3-11e9-8efd-688ead135bb3.jpg)
 ![candump-2](https://user-images.githubusercontent.com/6020549/57606051-0b3a4d00-75a3-11e9-8bd3-4169e181a782.jpg)
