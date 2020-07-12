@@ -1,6 +1,10 @@
 # esp-idf-candump
 Example code for CAN receive using ESP-IDF.   
 
+# Software requirement    
+esp-idf v4.2-dev-2243 or later.   
+Use twai(Two-Wire Automotive Interface) driver instead of can driver.   
+
 # Hardware requirement    
 3.3V CAN Bus Transceiver like SN65HVD230/231/232.   
 Terminator register, If you have only 2 node.   
