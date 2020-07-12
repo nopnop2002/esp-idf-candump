@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
@@ -16,6 +17,7 @@
 #include "esp_err.h"
 #include "esp_log.h"
 #include "driver/can.h"
+//#include "driver/twai.h" // Update from V4.2
 
 /* --------------------- Definitions and static variables ------------------ */
 //Example Configuration
@@ -25,6 +27,7 @@
 #define EXAMPLE_TAG 	"CANDUMP"
 
 static const can_filter_config_t f_config = CAN_FILTER_CONFIG_ACCEPT_ALL();
+
 #if CONFIG_CAN_BITRATE_25
 static const can_timing_config_t t_config = CAN_TIMING_CONFIG_25KBITS();
 #define BITRATE "Bitrate is 25 Kbit/s"
@@ -50,6 +53,7 @@ static const can_timing_config_t t_config = CAN_TIMING_CONFIG_800KBITS();
 static const can_timing_config_t t_config = CAN_TIMING_CONFIG_1MBITS();
 #define BITRATE "Bitrate is 1 Mbit/s"
 #endif
+
 //Set TX queue length to 0 due to listen only mode
 static const can_general_config_t g_config = 
 			{.mode = CAN_MODE_LISTEN_ONLY,
@@ -68,10 +72,26 @@ static void can_receive_task(void *arg)
 	while (1) {
 		can_message_t rx_msg;
 		can_receive(&rx_msg, portMAX_DELAY);
-		ESP_LOGI(pcTaskGetTaskName(0),"can_receive identifier=0x%x flags=0x%x data_length_code=%d",
+		ESP_LOGD(pcTaskGetTaskName(0),"can_receive identifier=0x%x flags=0x%x data_length_code=%d",
 			rx_msg.identifier, rx_msg.flags, rx_msg.data_length_code);
-		for (int i = 0; i < rx_msg.data_length_code; i++) {
-			printf("%02x ", rx_msg.data[i]);
+
+		int ext = rx_msg.flags & 0x01;
+		int rtr = rx_msg.flags & 0x02;
+
+		if (ext == 0) {
+			printf("Standard ID: 0x%03x     ", rx_msg.identifier);
+		} else {
+			printf("Extended ID: 0x%08x", rx_msg.identifier);
+		}
+		printf("  DLC: %d  Data: ", rx_msg.data_length_code);
+
+        if (rtr == 0) {
+			for (int i = 0; i < rx_msg.data_length_code; i++) {
+				printf("0x%02x ", rx_msg.data[i]);
+			}
+		} else {
+			printf("REMOTE REQUEST FRAME");
+
 		}
 		printf("\n");
 	}

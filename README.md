@@ -8,10 +8,10 @@ Terminator register, If you have only 2 node.
 # Wirering for CAN Bus Transceiver   
 |SN65HVD23x||ESP-32||
 |:-:|:-:|:-:|:-:|
-|D|--|GPIO21||
+|D(CTX)|--|GPIO21||
 |GND|--|GND||
 |Vcc|--|3.3V||
-|R|--|GPIO22||
+|R(CRX)|--|GPIO22||
 |Vref|--|N/C||
 |CANL|--||To CAN Bus|
 |CANH|--||To CAN Bus|
@@ -67,5 +67,5 @@ You have to adjust your CAN bitrate using menuconfig.
 ![candump-2](https://user-images.githubusercontent.com/6020549/57606051-0b3a4d00-75a3-11e9-8bd3-4169e181a782.jpg)
 ![candump-3](https://user-images.githubusercontent.com/6020549/57606052-0bd2e380-75a3-11e9-99d4-9e2008c29fd4.jpg)
 
-![candump-4](https://user-images.githubusercontent.com/6020549/57606053-0bd2e380-75a3-11e9-91ee-a52d892fcaff.jpg)
+![candump-4](https://user-images.githubusercontent.com/6020549/87237112-fff3e300-c42c-11ea-9a8c-1cf0cf0b755c.jpg)
 
