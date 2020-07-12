@@ -1,4 +1,4 @@
-/* CAN Network receive all data Example
+/* TWAI Network receive all data Example
 
    This example code is in the Public Domain (or CC0 licensed, at your option.)
 
@@ -16,63 +16,62 @@
 #include "freertos/semphr.h"
 #include "esp_err.h"
 #include "esp_log.h"
-#include "driver/can.h"
-//#include "driver/twai.h" // Update from V4.2
+#include "driver/twai.h" // Update from V4.2
 
 /* --------------------- Definitions and static variables ------------------ */
 //Example Configuration
 #define RX_TASK_PRIO	9
 #define TX_GPIO_NUM 	21
 #define RX_GPIO_NUM 	22
-#define EXAMPLE_TAG 	"CANDUMP"
+#define TAG 			"CANDUMP"
 
-static const can_filter_config_t f_config = CAN_FILTER_CONFIG_ACCEPT_ALL();
+static const twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL();
 
 #if CONFIG_CAN_BITRATE_25
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_25KBITS();
+static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_25KBITS();
 #define BITRATE "Bitrate is 25 Kbit/s"
 #elif CONFIG_CAN_BITRATE_50
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_50KBITS();
+static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_50KBITS();
 #define BITRATE "Bitrate is 50 Kbit/s"
 #elif CONFIG_CAN_BITRATE_100
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_100KBITS();
+static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_100KBITS();
 #define BITRATE "Bitrate is 100 Kbit/s"
 #elif CONFIG_CAN_BITRATE_125
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_125KBITS();
+static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_125KBITS();
 #define BITRATE "Bitrate is 125 Kbit/s"
 #elif CONFIG_CAN_BITRATE_250
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_250KBITS();
+static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_250KBITS();
 #define BITRATE "Bitrate is 250 Kbit/s"
 #elif CONFIG_CAN_BITRATE_500
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_500KBITS();
+static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_500KBITS();
 #define BITRATE "Bitrate is 500 Kbit/s"
 #elif CONFIG_CAN_BITRATE_800
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_800KBITS();
+static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_800KBITS();
 #define BITRATE "Bitrate is 800 Kbit/s"
 #elif CONFIG_CAN_BITRATE_1000
-static const can_timing_config_t t_config = CAN_TIMING_CONFIG_1MBITS();
+static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_1MBITS();
 #define BITRATE "Bitrate is 1 Mbit/s"
 #endif
 
 //Set TX queue length to 0 due to listen only mode
-static const can_general_config_t g_config = 
-			{.mode = CAN_MODE_LISTEN_ONLY,
+static const twai_general_config_t g_config = 
+			{.mode = TWAI_MODE_LISTEN_ONLY,
 			.tx_io = TX_GPIO_NUM, .rx_io = RX_GPIO_NUM,
-			.clkout_io = CAN_IO_UNUSED, .bus_off_io = CAN_IO_UNUSED,
+			.clkout_io = TWAI_IO_UNUSED, .bus_off_io = TWAI_IO_UNUSED,
 			.tx_queue_len = 0, .rx_queue_len = 5,
-			.alerts_enabled = CAN_ALERT_NONE,
+			.alerts_enabled = TWAI_ALERT_NONE,
 			.clkout_divider = 0};
 
 /* --------------------------- Tasks and Functions -------------------------- */
 
-static void can_receive_task(void *arg)
+static void twai_receive_task(void *arg)
 {
 	ESP_LOGI(pcTaskGetTaskName(0),"task start");
 
 	while (1) {
-		can_message_t rx_msg;
-		can_receive(&rx_msg, portMAX_DELAY);
-		ESP_LOGD(pcTaskGetTaskName(0),"can_receive identifier=0x%x flags=0x%x data_length_code=%d",
+		twai_message_t rx_msg;
+		twai_receive(&rx_msg, portMAX_DELAY);
+		ESP_LOGD(pcTaskGetTaskName(0),"twai_receive identifier=0x%x flags=0x%x data_length_code=%d",
 			rx_msg.identifier, rx_msg.flags, rx_msg.data_length_code);
 
 		int ext = rx_msg.flags & 0x01;
@@ -102,12 +101,12 @@ static void can_receive_task(void *arg)
 
 void app_main()
 {
-	//Install and start CAN driver
-	ESP_LOGI(EXAMPLE_TAG, "%s",BITRATE);
-	ESP_ERROR_CHECK(can_driver_install(&g_config, &t_config, &f_config));
-	ESP_LOGI(EXAMPLE_TAG, "Driver installed");
-	ESP_ERROR_CHECK(can_start());
-	ESP_LOGI(EXAMPLE_TAG, "Driver started");
+	//Install and start TWAI driver
+	ESP_LOGI(TAG, "%s",BITRATE);
+	ESP_ERROR_CHECK(twai_driver_install(&g_config, &t_config, &f_config));
+	ESP_LOGI(TAG, "Driver installed");
+	ESP_ERROR_CHECK(twai_start());
+	ESP_LOGI(TAG, "Driver started");
 
-	xTaskCreate(can_receive_task, "CAN_rx", 4096, NULL, RX_TASK_PRIO, NULL);
+	xTaskCreate(twai_receive_task, "TWAI_rx", 4096, NULL, RX_TASK_PRIO, NULL);
 }
