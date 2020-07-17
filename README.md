@@ -10,7 +10,7 @@ Use twai(Two-Wire Automotive Interface) driver instead of can driver.
 Terminator register, If you have only 2 node.   
 
 # Wirering for CAN Bus Transceiver   
-|SN65HVD23x||ESP-32||
+|SN65HVD23x||ESP32||
 |:-:|:-:|:-:|:-:|
 |D(CTX)|--|GPIO21||
 |GND|--|GND||
