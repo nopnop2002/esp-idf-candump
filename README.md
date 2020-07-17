@@ -60,7 +60,7 @@ Terminator register, If you have only 2 node.
 # Install   
 ```
 git clone https://github.com/nopnop2002/esp-idf-candump
-cd esp-idf-candump/
+cd esp-idf-candump
 make menuconfig
 make flash
 ```
