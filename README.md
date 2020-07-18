@@ -74,3 +74,11 @@ You have to set your CAN bitrate using menuconfig.
 
 ![candump-4](https://user-images.githubusercontent.com/6020549/87237112-fff3e300-c42c-11ea-9a8c-1cf0cf0b755c.jpg)
 
+
+# Acceptance Filter   
+The explanation about the acceptance filter is available [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/twai.html#acceptance-filter).
+There are diagrams of Bit layout of single filter mode and Bit layout of dual filter mode, but they are described in Right side MS Bit.   
+I've never seen a Right side MSBit before, so I thought it was a Left side MSBit.   
+I was very confused.   
+
+
