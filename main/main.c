@@ -21,8 +21,8 @@
 /* --------------------- Definitions and static variables ------------------ */
 //Example Configuration
 #define RX_TASK_PRIO	9
-#define TX_GPIO_NUM 	21
-#define RX_GPIO_NUM 	22
+//#define TX_GPIO_NUM 	32
+//#define RX_GPIO_NUM 	33
 #define TAG 			"CANDUMP"
 
 static const twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL();
@@ -53,14 +53,6 @@ static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_1MBITS();
 #define BITRATE "Bitrate is 1 Mbit/s"
 #endif
 
-//Set TX queue length to 0 due to listen only mode
-static const twai_general_config_t g_config = 
-			{.mode = TWAI_MODE_LISTEN_ONLY,
-			.tx_io = TX_GPIO_NUM, .rx_io = RX_GPIO_NUM,
-			.clkout_io = TWAI_IO_UNUSED, .bus_off_io = TWAI_IO_UNUSED,
-			.tx_queue_len = 0, .rx_queue_len = 5,
-			.alerts_enabled = TWAI_ALERT_NONE,
-			.clkout_divider = 0};
 
 /* --------------------------- Tasks and Functions -------------------------- */
 
@@ -102,7 +94,18 @@ static void twai_receive_task(void *arg)
 void app_main()
 {
 	//Install and start TWAI driver
-	ESP_LOGI(TAG, "%s",BITRATE);
+	ESP_LOGI(TAG, "BITRATE=%s",BITRATE);
+	ESP_LOGI(TAG, "CTX_GPIO=%d",CONFIG_CTX_GPIO);
+	ESP_LOGI(TAG, "CRX_GPIO=%d",CONFIG_CRX_GPIO);
+
+	//Set TX queue length to 0 due to listen only mode
+	twai_general_config_t g_config = 
+			{.mode = TWAI_MODE_LISTEN_ONLY,
+			.tx_io = CONFIG_CTX_GPIO, .rx_io = CONFIG_CRX_GPIO,
+			.clkout_io = TWAI_IO_UNUSED, .bus_off_io = TWAI_IO_UNUSED,
+			.tx_queue_len = 0, .rx_queue_len = 5,
+			.alerts_enabled = TWAI_ALERT_NONE,
+			.clkout_divider = 0};
 	ESP_ERROR_CHECK(twai_driver_install(&g_config, &t_config, &f_config));
 	ESP_LOGI(TAG, "Driver installed");
 	ESP_ERROR_CHECK(twai_start());

@@ -39,4 +39,22 @@ menu "CAN DEMO Configuration"
                 CAN bitrate is 1 Mbit/s.
     endchoice
 
+	config CTX_GPIO
+		int "CTX GPIO number"
+		range 0 34
+		default 32
+		help
+			GPIO number (IOxx) to CTX.
+			Some GPIOs are used for other purposes (flash connections, etc.).
+			GPIOs 35-39 are input-only so cannot be used as outputs.
+
+	config CRX_GPIO
+		int "CRX GPIO number"
+		range 0 34
+		default 33
+		help
+			GPIO number (IOxx) to CRX.
+			Some GPIOs are used for other purposes (flash connections, etc.).
+			GPIOs 35-39 are input-only so cannot be used as outputs.
+
 endmenu

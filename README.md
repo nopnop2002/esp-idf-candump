@@ -65,12 +65,14 @@ make menuconfig
 make flash
 ```
 
-# Set CAN Bitrate   
-You have to set your CAN bitrate using menuconfig.   
+You have to set this config value with menuconfig.
+- CAN Bitrate   
+- CTX GPIO number   
+- CRX GPIO number   
 
-![candump-1](https://user-images.githubusercontent.com/6020549/57606049-0b3a4d00-75a3-11e9-8efd-688ead135bb3.jpg)
-![candump-2](https://user-images.githubusercontent.com/6020549/57606051-0b3a4d00-75a3-11e9-8bd3-4169e181a782.jpg)
-![candump-3](https://user-images.githubusercontent.com/6020549/57606052-0bd2e380-75a3-11e9-99d4-9e2008c29fd4.jpg)
+![candump-1](https://user-images.githubusercontent.com/6020549/98186063-51caf680-1f51-11eb-8f42-85cabff71981.jpg)
+![candump-2](https://user-images.githubusercontent.com/6020549/98186069-5394ba00-1f51-11eb-90f4-a4a46c7a5a66.jpg)
+![candump-3](https://user-images.githubusercontent.com/6020549/98186076-57284100-1f51-11eb-98c7-faf8d70bd2ac.jpg)
 
 ![candump-4](https://user-images.githubusercontent.com/6020549/87237112-fff3e300-c42c-11ea-9a8c-1cf0cf0b755c.jpg)
 
