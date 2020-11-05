@@ -12,24 +12,24 @@ Terminator register, If you have only 2 node.
 # Wirering for CAN Bus Transceiver   
 |SN65HVD23x||ESP32||
 |:-:|:-:|:-:|:-:|
-|D(CTX)|--|GPIO21||
+|D(CTX)|--|GPIO32(*2)||
 |GND|--|GND||
 |Vcc|--|3.3V||
-|R(CRX)|--|GPIO22||
+|R(CRX)|--|GPIO33(*2)||
 |Vref|--|N/C||
 |CANL|--||To CAN Bus|
 |CANH|--||To CAN Bus|
 |RS|--|GND(*1)||
 
-(*1) N/C for SN65HVD232
-
+(*1) N/C for SN65HVD232   
+(*2) You can change with menuconfig.   
 
 # Test Circuit   
 ```
    +-----------+ +-----------+ +-----------+ 
    | Atmega328 | | Atmega328 | |   ESP32   | 
    |           | |           | |           | 
-   | Transmit  | | Receive   | | 21    22  | 
+   | Transmit  | | Receive   | | 32    33  | 
    +-----------+ +-----------+ +-----------+ 
      |       |    |        |     |       |   
    +-----------+ +-----------+   |       |   
