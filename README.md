@@ -5,24 +5,26 @@ Example code for CAN receive using ESP-IDF.
 esp-idf v4.2-dev-2243 or later.   
 Use twai(Two-Wire Automotive Interface) driver instead of can driver.   
 
-# Hardware requirement    
-- 3.3V CAN Bus Transceiver like SN65HVD230/231/232.   
-- Terminator register, If you have only 2 node.   
+# Hardware requirements
+1. SN65HVD23x CAN-BUS Transceiver   
 
-# Wirering for CAN Bus Transceiver   
-|SN65HVD23x||ESP32||
-|:-:|:-:|:-:|:-:|
-|D(CTX)|--|GPIO32(*2)||
-|GND|--|GND||
-|Vcc|--|3.3V||
-|R(CRX)|--|GPIO33(*2)||
-|Vref|--|N/C||
-|CANL|--||To CAN Bus|
-|CANH|--||To CAN Bus|
-|RS|--|GND(*1)||
+|SN65HVD23x||ESP32|ESP32-S2||
+|:-:|:-:|:-:|:-:|:-:|
+|D(CTX)|--|GPIO21|GPIO20|(*1)|
+|GND|--|GND|GND||
+|Vcc|--|3.3V|3.3V||
+|R(CRX)|--|GPIO22|GPIO21|(*1)|
+|Vref|--|N/C|N/C||
+|CANL|--|||To CAN Bus|
+|CANH|--|||To CAN Bus|
+|RS|--|GND|GND|(*2)|
 
-(*1) N/C for SN65HVD232   
-(*2) You can change with menuconfig.   
+(*1) You can change using menuconfig.
+
+(*2) N/C for SN65HVD232
+
+2. Termination resistance   
+I used 150 ohms.   
 
 # Test Circuit   
 ```
@@ -57,14 +59,25 @@ Use twai(Two-Wire Automotive Interface) driver instead of can driver.
       R2:150 ohms(Not working at 120 ohms)
 ```
 
-# Install   
+# Installation for ESP32
 ```
 git clone https://github.com/nopnop2002/esp-idf-candump
 cd esp-idf-candump
-make menuconfig
-make flash
+idf.py set-target esp32
+idf.py menuconfig
+idf.py flash
 ```
 
+# Installation for ESP32-S2
+```
+git clone https://github.com/nopnop2002/esp-idf-candump
+cd esp-idf-candump
+idf.py set-target esp32s2
+idf.py menuconfig
+idf.py flash
+```
+
+# Configuration   
 You have to set this config value with menuconfig.
 - CAN Bitrate   
 - CTX GPIO number   
