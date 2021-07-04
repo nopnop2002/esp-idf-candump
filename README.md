@@ -102,4 +102,10 @@ There are diagrams of Bit layout of single filter mode and Bit layout of dual fi
 I've never seen a __Right side MSBit__ before, so I thought it was a Left side MSBit.   
 I was very confused.   
 
+# Reference   
 
+https://github.com/nopnop2002/esp-idf-can2http
+
+https://github.com/nopnop2002/esp-idf-can2mqtt
+
+https://github.com/nopnop2002/esp-idf-can-browser
