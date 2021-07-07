@@ -18,12 +18,7 @@
 #include "esp_log.h"
 #include "driver/twai.h" // Update from V4.2
 
-/* --------------------- Definitions and static variables ------------------ */
-//Example Configuration
-#define RX_TASK_PRIO	9
-//#define TX_GPIO_NUM 	32
-//#define RX_GPIO_NUM 	33
-#define TAG 			"CANDUMP"
+#define TAG "CANDUMP"
 
 static const twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL();
 
@@ -54,8 +49,6 @@ static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_1MBITS();
 #endif
 
 
-/* --------------------------- Tasks and Functions -------------------------- */
-
 static void twai_receive_task(void *arg)
 {
 	ESP_LOGI(pcTaskGetTaskName(0),"task start");
@@ -76,7 +69,7 @@ static void twai_receive_task(void *arg)
 		}
 		printf("  DLC: %d  Data: ", rx_msg.data_length_code);
 
-        if (rtr == 0) {
+		if (rtr == 0) {
 			for (int i = 0; i < rx_msg.data_length_code; i++) {
 				printf("0x%02x ", rx_msg.data[i]);
 			}
@@ -87,7 +80,7 @@ static void twai_receive_task(void *arg)
 		printf("\n");
 	}
 
-	// never reach
+	// Never reach here
 	vTaskDelete(NULL);
 }
 
@@ -111,5 +104,5 @@ void app_main()
 	ESP_ERROR_CHECK(twai_start());
 	ESP_LOGI(TAG, "Driver started");
 
-	xTaskCreate(twai_receive_task, "TWAI_rx", 4096, NULL, RX_TASK_PRIO, NULL);
+	xTaskCreate(twai_receive_task, "twai_rx", 1024*4, NULL, 2, NULL);
 }
