@@ -19,7 +19,7 @@ Use twai(Two-Wire Automotive Interface) driver instead of can driver.
 |CANH|--||||To CAN Bus|
 |RS|--|GND|GND|GND|(*2)|
 
-(*1) You can change using menuconfig.
+(*1) You can change using menuconfig. But it may not work with other GPIOs.  
 
 (*2) N/C for SN65HVD232
 
