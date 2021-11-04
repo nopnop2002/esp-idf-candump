@@ -1,5 +1,7 @@
 # esp-idf-candump
 Example code for CAN receive using ESP-IDF.   
+ESP-IDF contains three example for TWAI, but you need two ESP32s running master and slave, or master and listen_only at the same time.   
+So, I made a reception-only tool with Raspberry or Arduino as the sender.   
 
 # Software requirement    
 esp-idf v4.2-dev-2243 or later.   
