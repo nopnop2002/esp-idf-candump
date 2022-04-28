@@ -1,10 +1,10 @@
 /* TWAI Network receive all data Example
 
-   This example code is in the Public Domain (or CC0 licensed, at your option.)
+	 This example code is in the Public Domain (or CC0 licensed, at your option.)
 
-   Unless required by applicable law or agreed to in writing, this
-   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-   CONDITIONS OF ANY KIND, either express or implied.
+	 Unless required by applicable law or agreed to in writing, this
+	 software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+	 CONDITIONS OF ANY KIND, either express or implied.
 */
 
 #include <stdio.h>
@@ -48,6 +48,8 @@ static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_1MBITS();
 #define BITRATE "Bitrate is 1 Mbit/s"
 #endif
 
+static const twai_general_config_t g_config =
+	TWAI_GENERAL_CONFIG_DEFAULT(CONFIG_CTX_GPIO, CONFIG_CRX_GPIO, TWAI_MODE_NORMAL);
 
 static void twai_receive_task(void *arg)
 {
@@ -56,11 +58,13 @@ static void twai_receive_task(void *arg)
 	while (1) {
 		twai_message_t rx_msg;
 		twai_receive(&rx_msg, portMAX_DELAY);
-		ESP_LOGD(pcTaskGetName(0),"twai_receive identifier=0x%x flags=0x%x data_length_code=%d",
-			rx_msg.identifier, rx_msg.flags, rx_msg.data_length_code);
+		ESP_LOGD(pcTaskGetName(0),"twai_receive identifier=0x%x flags=0x%x extd=0x%x rtr=0x%x data_length_code=%d",
+			rx_msg.identifier, rx_msg.flags, rx_msg.extd, rx_msg.rtr, rx_msg.data_length_code);
 
-		int ext = rx_msg.flags & 0x01;
-		int rtr = rx_msg.flags & 0x02;
+		//int ext = rx_msg.flags & 0x01; // flags is Deprecated
+		int ext = rx_msg.extd;
+		//int rtr = rx_msg.flags & 0x02; // flags is Deprecated
+		int rtr = rx_msg.rtr;
 
 		if (ext == 0) {
 			printf("Standard ID: 0x%03x     ", rx_msg.identifier);
@@ -91,14 +95,6 @@ void app_main()
 	ESP_LOGI(TAG, "CTX_GPIO=%d",CONFIG_CTX_GPIO);
 	ESP_LOGI(TAG, "CRX_GPIO=%d",CONFIG_CRX_GPIO);
 
-	//Set TX queue length to 0 due to listen only mode
-	twai_general_config_t g_config = 
-		{.mode = TWAI_MODE_LISTEN_ONLY,
-		.tx_io = CONFIG_CTX_GPIO, .rx_io = CONFIG_CRX_GPIO,
-		.clkout_io = TWAI_IO_UNUSED, .bus_off_io = TWAI_IO_UNUSED,
-		.tx_queue_len = 0, .rx_queue_len = 5,
-		.alerts_enabled = TWAI_ALERT_NONE,
-		.clkout_divider = 0};
 	ESP_ERROR_CHECK(twai_driver_install(&g_config, &t_config, &f_config));
 	ESP_LOGI(TAG, "Driver installed");
 	ESP_ERROR_CHECK(twai_start());
