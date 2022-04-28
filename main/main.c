@@ -51,12 +51,12 @@ static const twai_timing_config_t t_config = TWAI_TIMING_CONFIG_1MBITS();
 
 static void twai_receive_task(void *arg)
 {
-	ESP_LOGI(pcTaskGetTaskName(0),"task start");
+	ESP_LOGI(pcTaskGetName(0),"task start");
 
 	while (1) {
 		twai_message_t rx_msg;
 		twai_receive(&rx_msg, portMAX_DELAY);
-		ESP_LOGD(pcTaskGetTaskName(0),"twai_receive identifier=0x%x flags=0x%x data_length_code=%d",
+		ESP_LOGD(pcTaskGetName(0),"twai_receive identifier=0x%x flags=0x%x data_length_code=%d",
 			rx_msg.identifier, rx_msg.flags, rx_msg.data_length_code);
 
 		int ext = rx_msg.flags & 0x01;
