@@ -14,12 +14,12 @@ Use twai(Two-Wire Automotive Interface) driver instead of can driver.
 I used 150 ohms.   
 
 # Wireing   
-|SN65HVD23x||ESP32|ESP32-S2|ESP32-C3||
+|SN65HVD23x||ESP32|ESP32-S2/S3|ESP32-C3||
 |:-:|:-:|:-:|:-:|:-:|:-:|
-|D(CTX)|--|GPIO21|GPIO17|GPIO9|(*1)|
+|D(CTX)|--|GPIO21|GPIO19|GPIO9|(*1)|
 |GND|--|GND|GND|GND||
 |Vcc|--|3.3V|3.3V|3.3V||
-|R(CRX)|--|GPIO22|GPIO18|GPIO10|(*1)|
+|R(CRX)|--|GPIO22|GPIO20|GPIO10|(*1)|
 |Vref|--|N/C|N/C|N/C||
 |CANL|--||||To CAN Bus|
 |CANH|--||||To CAN Bus|
@@ -69,32 +69,15 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 
 
 
-# Installation for ESP32
+# Installation
 ```
 git clone https://github.com/nopnop2002/esp-idf-candump
 cd esp-idf-candump
-idf.py set-target esp32
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c3}
 idf.py menuconfig
 idf.py flash
 ```
 
-# Installation for ESP32-S2
-```
-git clone https://github.com/nopnop2002/esp-idf-candump
-cd esp-idf-candump
-idf.py set-target esp32s2
-idf.py menuconfig
-idf.py flash
-```
-
-# Installation for ESP32-C3
-```
-git clone https://github.com/nopnop2002/esp-idf-candump
-cd esp-idf-candump
-idf.py set-target esp32c3
-idf.py menuconfig
-idf.py flash
-```
 
 # Configuration   
 You have to set this config value with menuconfig.
