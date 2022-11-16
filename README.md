@@ -4,7 +4,7 @@ ESP-IDF contains three example for TWAI, but you need two ESP32s running master 
 So, I made a reception-only tool with Raspberry or Arduino as the sender.   
 
 # Software requirement    
-esp-idf v4.2-dev-2243 or later.   
+esp-idf v4.4/v5.0.   
 Use twai(Two-Wire Automotive Interface) driver instead of can driver.   
 
 # Hardware requirements
