@@ -8,6 +8,7 @@
 */
 
 #include <stdio.h>
+#include <inttypes.h>
 #include <stdlib.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
@@ -58,7 +59,7 @@ static void twai_receive_task(void *arg)
 	while (1) {
 		twai_message_t rx_msg;
 		twai_receive(&rx_msg, portMAX_DELAY);
-		ESP_LOGD(pcTaskGetName(0),"twai_receive identifier=0x%x flags=0x%x extd=0x%x rtr=0x%x data_length_code=%d",
+		ESP_LOGD(pcTaskGetName(0),"twai_receive identifier=0x%"PRIu32" flags=0x%"PRIu32" extd=0x%x rtr=0x%x data_length_code=%d",
 			rx_msg.identifier, rx_msg.flags, rx_msg.extd, rx_msg.rtr, rx_msg.data_length_code);
 
 		//int ext = rx_msg.flags & 0x01; // flags is Deprecated
@@ -67,9 +68,9 @@ static void twai_receive_task(void *arg)
 		int rtr = rx_msg.rtr;
 
 		if (ext == 0) {
-			printf("Standard ID: 0x%03x     ", rx_msg.identifier);
+			printf("Standard ID: 0x%03"PRIu32"     ", rx_msg.identifier);
 		} else {
-			printf("Extended ID: 0x%08x", rx_msg.identifier);
+			printf("Extended ID: 0x%08"PRIu32, rx_msg.identifier);
 		}
 		printf("  DLC: %d  Data: ", rx_msg.data_length_code);
 
