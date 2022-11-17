@@ -59,7 +59,7 @@ static void twai_receive_task(void *arg)
 	while (1) {
 		twai_message_t rx_msg;
 		twai_receive(&rx_msg, portMAX_DELAY);
-		ESP_LOGD(pcTaskGetName(0),"twai_receive identifier=0x%"PRIu32" flags=0x%"PRIu32" extd=0x%x rtr=0x%x data_length_code=%d",
+		ESP_LOGD(pcTaskGetName(0),"twai_receive identifier=0x%"PRIx32" flags=0x%"PRIx32" extd=0x%x rtr=0x%x data_length_code=%d",
 			rx_msg.identifier, rx_msg.flags, rx_msg.extd, rx_msg.rtr, rx_msg.data_length_code);
 
 		//int ext = rx_msg.flags & 0x01; // flags is Deprecated
