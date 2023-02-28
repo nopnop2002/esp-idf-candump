@@ -9,6 +9,11 @@ Thus, it is CAN 2.0B specification compliant and supports two message formats:
 ESP-IDF contains three example for TWAI, but you need two ESP32s running master and slave, or master and listen_only at the same time.   
 So, I made a reception-only tool with Raspberry or Arduino as the sender.   
 
+__Note for can bit rate__   
+In ESP32 whose chip version is Rev2 or higher, the role of register bits related to CAN communication has been changed to mean "halve the communication speed".   
+See [here](https://github.com/sandeepmistry/arduino-CAN/issues/62) for detail.
+
+
 # Software requirement    
 esp-idf v4.4/v5.0.   
 Use twai(Two-Wire Automotive Interface) driver instead of can driver.   
