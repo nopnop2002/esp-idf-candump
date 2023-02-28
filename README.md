@@ -1,5 +1,11 @@
 # esp-idf-candump
 Example code for CAN receive using ESP-IDF.   
+
+The ESP32 intregates a CAN controller which is compatible with the NXP SJA1000 CAN controller.   
+Thus, it is CAN 2.0B specification compliant and supports two message formats:   
+- Base frame format (11-bit ID)   
+- Extended frame format (29-bit ID)   
+
 ESP-IDF contains three example for TWAI, but you need two ESP32s running master and slave, or master and listen_only at the same time.   
 So, I made a reception-only tool with Raspberry or Arduino as the sender.   
 
