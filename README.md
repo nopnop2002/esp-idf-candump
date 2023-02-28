@@ -11,6 +11,7 @@ So, I made a reception-only tool with Raspberry or Arduino as the sender.
 
 __Note for can bit rate__   
 In ESP32 whose chip version is Rev2 or higher, the role of register bits related to CAN communication has been changed to mean "halve the communication speed".   
+Therefore, even if ESP32 and ESP32 can communicate correctly, ESP32 and other MCU may not communicate correctly.   
 See [here](https://github.com/sandeepmistry/arduino-CAN/issues/62) for detail.
 
 
