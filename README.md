@@ -12,7 +12,7 @@ So, I made a reception-only tool with Raspberry or Arduino as the sender.
 __Note for can bit rate__   
 In ESP32 whose chip version is Rev2 or higher, the role of register bits related to CAN communication has been changed to mean "halve the communication speed".   
 This is to support slow BitRates below 25K.   
-This fuature is can be controlled by CONFIG_ESP32_REV_MIN.   
+This fuature can be controlled by CONFIG_ESP32_REV_MIN.   
 This fuature is enabled when CONFIG_ESP32_REV_MIN >= 2.   
 See [here](https://www.esp32.com/viewtopic.php?t=15581) for detail.
 
