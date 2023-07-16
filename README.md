@@ -118,4 +118,4 @@ https://github.com/nopnop2002/esp-idf-can2http
 
 https://github.com/nopnop2002/esp-idf-can2mqtt
 
-https://github.com/nopnop2002/esp-idf-can-browser
+https://github.com/nopnop2002/esp-idf-can2websocket
