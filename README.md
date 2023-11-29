@@ -22,9 +22,13 @@ ESP-IDF V4.4/V5.x.
 ESP-IDF V5.1 is required when using ESP32C6.   
 
 # Hardware requirements
-- SN65HVD23x CAN-BUS Transceiver   
 
-- Termination resistance   
+1.SN65HVD23x CAN-BUS Transceiver   
+SN65HVD23x series has 230/231/232.   
+They differ in standby/sleep mode functionality.   
+Other features are the same.   
+
+2.Termination resistance   
 I used 150 ohms.   
 
 # Wireing   
