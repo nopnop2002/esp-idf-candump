@@ -33,7 +33,7 @@ Menu->Devices->Bluetooth LE
 
 - Connect to device   
 
-You can display CAN messages using Android/iOS.   
+You can display CAN messages using Android.   
 ![ble-3](https://github.com/nopnop2002/esp-idf-candump/assets/6020549/a5a2c0ed-71de-46a5-8523-2a240a67b253)
 
 # iOS Application   
