@@ -1,10 +1,10 @@
-/* TWAI Network receive all data Example
+/*	TWAI Network receive all data Example
 
-	 This example code is in the Public Domain (or CC0 licensed, at your option.)
+	This example code is in the Public Domain (or CC0 licensed, at your option.)
 
-	 Unless required by applicable law or agreed to in writing, this
-	 software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-	 CONDITIONS OF ANY KIND, either express or implied.
+	Unless required by applicable law or agreed to in writing, this
+	software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+	CONDITIONS OF ANY KIND, either express or implied.
 */
 
 #include <stdio.h>
@@ -14,12 +14,16 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
-#include "freertos/semphr.h"
+#include "nvs_flash.h"
 #include "esp_err.h"
 #include "esp_log.h"
 #include "driver/twai.h" // Update from V4.2
 
+#include "cmd.h"
+
 #define TAG "CANDUMP"
+
+QueueHandle_t xQueueSpp;
 
 static const twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL();
 
@@ -55,8 +59,16 @@ static const twai_general_config_t g_config =
 static void twai_receive_task(void *arg)
 {
 	ESP_LOGI(pcTaskGetName(0),"task start");
+	CMD_t cmdBuf;
+	cmdBuf.taskHandle = xTaskGetCurrentTaskHandle();
+	cmdBuf.spp_event_id = SPP_RECEIVE_EVT;
+	char CRLF[3];
+	CRLF[0] = 0x0d;
+	CRLF[1] = 0x0a;
+	CRLF[2] = 0x00;
 
 	while (1) {
+		char work[128];
 		twai_message_t rx_msg;
 		twai_receive(&rx_msg, portMAX_DELAY);
 		ESP_LOGD(pcTaskGetName(0),"twai_receive identifier=0x%"PRIx32" flags=0x%"PRIx32" extd=0x%x rtr=0x%x data_length_code=%d",
@@ -68,30 +80,55 @@ static void twai_receive_task(void *arg)
 		int rtr = rx_msg.rtr;
 
 		if (ext == 0) {
-			printf("Standard ID: 0x%03"PRIu32"     ", rx_msg.identifier);
+			sprintf(work, "Standard ID: 0x%03"PRIu32"     ", rx_msg.identifier);
 		} else {
-			printf("Extended ID: 0x%08"PRIu32, rx_msg.identifier);
+			sprintf(work, "Extended ID: 0x%08"PRIu32, rx_msg.identifier);
 		}
-		printf("  DLC: %d  Data: ", rx_msg.data_length_code);
+		strcpy((char *)cmdBuf.payload, work);
+		sprintf(work, "  DLC: %d  Data: ", rx_msg.data_length_code);
+		strcat((char *)cmdBuf.payload, work);
 
 		if (rtr == 0) {
 			for (int i = 0; i < rx_msg.data_length_code; i++) {
-				printf("0x%02x ", rx_msg.data[i]);
+				sprintf(work, "0x%02x ", rx_msg.data[i]);
+				strcat((char *)cmdBuf.payload, work);
 			}
 		} else {
-			printf("REMOTE REQUEST FRAME");
+			sprintf(work, "REMOTE REQUEST FRAME");
+			strcat((char *)cmdBuf.payload, work);
 
 		}
-		printf("\n");
+		strcat((char *)cmdBuf.payload, CRLF);
+		cmdBuf.length = strlen((char *)cmdBuf.payload);
+		ESP_LOGD(pcTaskGetName(NULL), "[%.*s]", cmdBuf.length, cmdBuf.payload);
+
+		BaseType_t err = xQueueSend(xQueueSpp, &cmdBuf, portMAX_DELAY);
+		if (err != pdTRUE) {
+			ESP_LOGE(pcTaskGetName(NULL), "xQueueSend Fail");
+		}
 	}
 
 	// Never reach here
 	vTaskDelete(NULL);
 }
 
+void spp_task(void* pvParameters);
+
 void app_main()
 {
-	//Install and start TWAI driver
+	// Initialize NVS
+	esp_err_t ret = nvs_flash_init();
+	if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+		ESP_ERROR_CHECK(nvs_flash_erase());
+		ret = nvs_flash_init();
+	}
+	ESP_ERROR_CHECK(ret);
+
+	// Create Queue
+	xQueueSpp = xQueueCreate( 10, sizeof(CMD_t) );
+	configASSERT( xQueueSpp );
+
+	// Install and start TWAI driver
 	ESP_LOGI(TAG, "%s",BITRATE);
 	ESP_LOGI(TAG, "CTX_GPIO=%d",CONFIG_CTX_GPIO);
 	ESP_LOGI(TAG, "CRX_GPIO=%d",CONFIG_CRX_GPIO);
@@ -101,5 +138,7 @@ void app_main()
 	ESP_ERROR_CHECK(twai_start());
 	ESP_LOGI(TAG, "Driver started");
 
-	xTaskCreate(twai_receive_task, "twai_rx", 1024*4, NULL, 2, NULL);
+	// Start task
+	xTaskCreate(twai_receive_task, "TWAI", 1024*4, NULL, 2, NULL);
+	xTaskCreate(spp_task, "SPP", 1024*4, NULL, 2, NULL);
 }

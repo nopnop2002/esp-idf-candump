@@ -1,4 +1,4 @@
-menu "CAN DEMO Configuration"
+menu "Application Configuration"
 
 	config GPIO_RANGE_MAX
 		int
