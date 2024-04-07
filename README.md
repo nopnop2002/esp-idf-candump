@@ -85,6 +85,7 @@ __NOTE__
 3V CAN Trasnceviers like VP230 are fully interoperable with 5V CAN trasnceviers like MCP2551.   
 Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 
+![ESP32-CAN-3V3](https://github.com/nopnop2002/esp-idf-candump/assets/6020549/31c8257c-7ed5-467d-8e2d-18225d91553a)
 
 
 # Installation
