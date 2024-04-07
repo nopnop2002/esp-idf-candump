@@ -1,4 +1,4 @@
-# esp-idf-candump classic_bt
+# classic_bt
 Output received data to bluetooth.   
 
 ![classic_bt](https://github.com/nopnop2002/esp-idf-candump/assets/6020549/e6c03df7-6f2a-4c38-b740-8b9cf708a0bb)
