@@ -1,5 +1,6 @@
 # ble
 Output received data to ble.   
+You can use android/iOS.   
 
 # Installation
 
