@@ -1,4 +1,4 @@
-# esp-idf-candump stdout
+# stdout
 Display received data to standard output.   
 
 # ScreenShot   
