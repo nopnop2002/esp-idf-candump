@@ -26,7 +26,7 @@ Menu->Devices->Bluetooth Classic
 
 - Connect to device   
 You can communicate to MQTT using android/iOS.   
-![classic-2](https://github.com/nopnop2002/esp-idf-mqtt2bt/assets/6020549/29362c82-7042-40dd-85bf-3e06cd958ac6)
+![classic-2](https://github.com/nopnop2002/esp-idf-candump/assets/6020549/385efb1a-85d3-43da-a1ee-9d72cc3118a6)
 
 
 # iOS Application   
