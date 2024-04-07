@@ -80,9 +80,9 @@ static void twai_receive_task(void *arg)
 		int rtr = rx_msg.rtr;
 
 		if (ext == 0) {
-			sprintf(work, "Standard ID: 0x%03"PRIu32"     ", rx_msg.identifier);
+			sprintf(work, "Standard ID: 0x%03"PRIx32"     ", rx_msg.identifier);
 		} else {
-			sprintf(work, "Extended ID: 0x%08"PRIu32, rx_msg.identifier);
+			sprintf(work, "Extended ID: 0x%08"PRIx32, rx_msg.identifier);
 		}
 		strcpy((char *)cmdBuf.payload, work);
 		sprintf(work, "  DLC: %d  Data: ", rx_msg.data_length_code);
