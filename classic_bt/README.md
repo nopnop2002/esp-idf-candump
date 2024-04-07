@@ -26,7 +26,7 @@ Menu->Devices->Bluetooth Classic
 ![classic-1](https://github.com/nopnop2002/esp-idf-mqtt2bt/assets/6020549/1dbef296-173e-4a49-afce-5db27bae3968)
 
 - Connect to device   
-You can display CAN messages using Android/iOS.   
+You can display CAN messages using Android.   
 ![classic-2](https://github.com/nopnop2002/esp-idf-candump/assets/6020549/385efb1a-85d3-43da-a1ee-9d72cc3118a6)
 
 
