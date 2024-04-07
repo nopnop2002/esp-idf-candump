@@ -1,0 +1,72 @@
+menu "Application Configuration"
+
+	config GPIO_RANGE_MAX
+		int
+		default 33 if IDF_TARGET_ESP32
+		default 46 if IDF_TARGET_ESP32S2
+		default 48 if IDF_TARGET_ESP32S3
+		default 19 if IDF_TARGET_ESP32C3
+		default 30 if IDF_TARGET_ESP32C6
+
+	choice CAN_BITRATE
+		prompt "CAN Bitrate"
+		default CAN_BITRATE_500
+		help
+			Select the CAN bitrate for the example.
+		config CAN_BITRATE_25
+			bool "BITRATE_25"
+			help
+				CAN bitrate is 25 Kbit/s.
+		config CAN_BITRATE_50
+			bool "BITRATE_50"
+			help
+				CAN bitrate is 50 Kbit/s.
+		config CAN_BITRATE_100
+			bool "BITRATE_100"
+			help
+				CAN bitrate is 100 Kbit/s.
+		config CAN_BITRATE_125
+			bool "BITRATE_125"
+			help
+				CAN bitrate is 125 Kbit/s.
+		config CAN_BITRATE_250
+			bool "BITRATE_250"
+			help
+				CAN bitrate is 250 Kbit/s.
+		config CAN_BITRATE_500
+			bool "BITRATE_500"
+			help
+				CAN bitrate is 500 Kbit/s.
+		config CAN_BITRATE_800
+			bool "BITRATE_800"
+			help
+				CAN bitrate is 800 Kbit/s.
+		config CAN_BITRATE_1000
+			bool "BITRATE_1000"
+			help
+				CAN bitrate is 1 Mbit/s.
+	endchoice
+
+	config CTX_GPIO
+		int "CTX GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 21 if IDF_TARGET_ESP32
+		default 17 if IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+		default  0 # C3 and others
+		help
+			GPIO number (IOxx) to CTX.
+			Some GPIOs are used for other purposes (flash connections, etc.).
+			GPIOs 35-39 are input-only so cannot be used as outputs.
+
+	config CRX_GPIO
+		int "CRX GPIO number"
+		range 0 GPIO_RANGE_MAX
+		default 22 if IDF_TARGET_ESP32
+		default 18 if IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+		default  1 # C3 and others
+		help
+			GPIO number (IOxx) to CRX.
+			Some GPIOs are used for other purposes (flash connections, etc.).
+			GPIOs 35-39 are input-only so cannot be used as outputs.
+
+endmenu
