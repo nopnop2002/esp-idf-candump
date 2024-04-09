@@ -32,7 +32,6 @@ Menu->Devices->Bluetooth LE
 ![ble-2](https://user-images.githubusercontent.com/6020549/184459827-f62dc206-6bc2-41a7-9a88-74b9c84bbb89.JPG)
 
 - Connect to device   
-
 You can display CAN messages using Android.   
 ![ble-3](https://github.com/nopnop2002/esp-idf-candump/assets/6020549/a5a2c0ed-71de-46a5-8523-2a240a67b253)
 
