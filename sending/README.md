@@ -36,4 +36,5 @@ Extended ID: 0x00000032  DLC: 8  Data: 0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07
 ```
 
 If the transceiver and terminator are connected correctly, this will be displayed on the receiving side.   
+If nothing is displayed on the receiving side, please check your connection.   
 ![Image](https://github.com/user-attachments/assets/304c4d70-51c9-48cf-bb93-570315ae080b)
