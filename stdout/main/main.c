@@ -17,7 +17,7 @@
 #include "esp_log.h"
 #include "driver/twai.h" // Update from V4.2
 
-#define TAG "CANDUMP"
+static const char *TAG = "CANDUMP";
 
 static const twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL();
 

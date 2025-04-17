@@ -21,7 +21,7 @@
 
 #include "cmd.h"
 
-#define TAG "CANDUMP"
+static const char *TAG = "CANDUMP";
 
 QueueHandle_t xQueueSpp;
 
