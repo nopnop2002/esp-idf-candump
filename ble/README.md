@@ -2,6 +2,8 @@
 Output received data to ble.   
 You can use android/iOS.   
 
+![Image](https://github.com/user-attachments/assets/536b8936-c08b-4200-ade4-57fcd6812731)
+
 # Installation
 
 ```
@@ -13,6 +15,7 @@ idf.py flash
 ```
 
 # Android Application   
+I used [this](https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal) app.   
 
 - For ESP32, pair with ESP32_SPP_SERVER   
 
