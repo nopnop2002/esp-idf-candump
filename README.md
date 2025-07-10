@@ -9,17 +9,10 @@ Thus, it is CAN 2.0B specification compliant and supports two message formats:
 ESP-IDF contains three example for TWAI, but you need two ESP32s running master and slave, or master and listen_only at the same time.   
 So, I made a reception-only tool with Raspberry or Arduino as the sender.   
 
-__Note for ESP-IDF V4.4 can bitrate__   
-In ESP32 whose chip version is Rev2 or higher, the role of register bits related to CAN communication has been changed to mean "halve the communication speed".   
-This is to support slower bitrates below 25Kbps.   
-This fuature can be controlled by CONFIG_ESP32_REV_MIN.   
-This fuature is enabled when CONFIG_ESP32_REV_MIN >= 2.   
-See [here](https://www.esp32.com/viewtopic.php?t=15581) for detail.
-
-
 # Software requirement    
-ESP-IDF V4.4/V5.x.   
-ESP-IDF V5.1 is required when using ESP32C6.   
+ESP-IDF V5.0 or later.   
+ESP-IDF V4.4 release branch reached EOL in July 2024.   
+ESP-IDF V5.1 is required when using ESP32-C6.   
 
 # Hardware requirements
 
