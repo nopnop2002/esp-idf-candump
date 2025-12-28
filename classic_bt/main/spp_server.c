@@ -82,7 +82,11 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 		if (param->start.status == ESP_SPP_SUCCESS) {
 			ESP_LOGI(TAG, "ESP_SPP_START_EVT handle:%"PRIu32" sec_id:%d scn:%d", param->start.handle, param->start.sec_id,
 				param->start.scn);
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 3, 0)
+			esp_bt_gap_set_device_name(DEVICE_NAME);
+#else
 			esp_bt_dev_set_device_name(DEVICE_NAME);
+#endif
 			esp_bt_gap_set_scan_mode(ESP_BT_CONNECTABLE, ESP_BT_GENERAL_DISCOVERABLE);
 		} else {
 			ESP_LOGE(TAG, "ESP_SPP_START_EVT status:%d", param->start.status);
@@ -93,7 +97,7 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 		break;
 	case ESP_SPP_DATA_IND_EVT:
 		ESP_LOGI(TAG, "ESP_SPP_DATA_IND_EVT len:%d handle:%"PRIu32, param->data_ind.len, param->data_ind.handle);
-		esp_log_buffer_hex(__FUNCTION__, param->data_ind.data, param->data_ind.len);
+		ESP_LOG_BUFFER_HEXDUMP(__FUNCTION__, param->data_ind.data, param->data_ind.len, ESP_LOG_INFO);
 		break;
 	case ESP_SPP_CONG_EVT:
 		ESP_LOGI(TAG, "ESP_SPP_CONG_EVT");
