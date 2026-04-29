@@ -6,21 +6,14 @@ Thus, it is CAN 2.0B specification compliant and supports two message formats:
 - Base frame format (11-bit ID)   
 - Extended frame format (29-bit ID)   
 
-ESP-IDF contains three example for TWAI, but you need two ESP32s running master and slave, or master and listen_only at the same time.   
-So, I made a reception-only tool with Raspberry or Arduino as the sender.   
+The CAN driver specifications have been significantly changed since ESP-IDF V6.   
+This project was created to compare the legacy driver and the new driver.   
+ESP-IDF V5 uses the legacy driver.   
+ESP-IDF V6 uses the new driver.   
 
 # Software requirement    
 ESP-IDF V5.0 or later.   
 ESP-IDF V4.4 release branch reached EOL in July 2024.   
-
-__Note for ESP-IDF V6__   
-This option is required for ESP-IDF V6 because this project uses legacy drivers.   
-<img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/fd46966b-6a9f-4034-a9e3-b13a75c02bc8" />
-
-ESP-IDF V6 gives this warning, but it still works.   
-```
-#warning "The legacy TWAI driver is deprecated, please use esp_twai.h"
-```
 
 # Hardware requirements
 
@@ -93,7 +86,7 @@ Check [here](http://www.ti.com/lit/an/slla337/slla337.pdf).
 # Installation
 ```
 git clone https://github.com/nopnop2002/esp-idf-candump
-cd esp-idf-candump/stdout
+cd esp-idf-candump
 idf.py set-target {esp32/esp32s2/esp32s3/esp32c3/esp32c6}
 idf.py menuconfig
 idf.py flash
@@ -112,12 +105,6 @@ You have to set this config value with menuconfig.
 
 # ScreenShot   
 ![stdout](https://github.com/nopnop2002/esp-idf-candump/assets/6020549/bdad5960-b13f-497a-a3f5-a4bd749a1e3e)
-
-# Acceptance Filter   
-The explanation about the acceptance filter is available [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/twai.html#acceptance-filter).   
-There are diagrams of Bit layout of single filter mode and Bit layout of dual filter mode, but they are described in __Right side MSBit__.   
-I've never seen a __Right side MSBit__ before, so I thought it was a Left side MSBit.   
-I was very confused.   
 
 # Reference   
 
