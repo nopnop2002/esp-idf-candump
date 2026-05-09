@@ -73,9 +73,9 @@ void twai_print_frame(twai_message_t frame) {
 void twai_receive_task(void *arg)
 {
 	ESP_LOGI(TAG, "Start");
-    ESP_LOGI(TAG, "TWAI_BITRATE=%d",CONFIG_TWAI_BITRATE);
-    ESP_LOGI(TAG, "CTX_GPIO=%d",CONFIG_CTX_GPIO);
-    ESP_LOGI(TAG, "CRX_GPIO=%d",CONFIG_CRX_GPIO);
+	ESP_LOGI(TAG, "TWAI_BITRATE=%d",CONFIG_TWAI_BITRATE);
+	ESP_LOGI(TAG, "CTX_GPIO=%d",CONFIG_CTX_GPIO);
+	ESP_LOGI(TAG, "CRX_GPIO=%d",CONFIG_CRX_GPIO);
 
 	ESP_ERROR_CHECK(twai_driver_install(&g_config, &t_config, &f_config));
 	ESP_LOGI(TAG, "Driver installed");
@@ -91,5 +91,7 @@ void twai_receive_task(void *arg)
 	} // end while
 
 	// Never reach here
+	ESP_ERROR_CHECK(twai_stop());
+	ESP_ERROR_CHECK(twai_driver_uninstall());
 	vTaskDelete(NULL);
 }
