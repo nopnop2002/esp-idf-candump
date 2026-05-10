@@ -26,16 +26,16 @@ Other features are the same.
 I used 150 ohms.   
 
 # Wireing   
-|SN65HVD23x||ESP32|ESP32-S2/S3|ESP32-Cx/Hx||
-|:-:|:-:|:-:|:-:|:-:|:-:|
-|D(CTX)|--|GPIO21|GPIO17|GPIO0|(*1)|
-|GND|--|GND|GND|GND||
-|Vcc|--|3.3V|3.3V|3.3V||
-|R(CRX)|--|GPIO22|GPIO18|GPIO1|(*1)|
-|Vref|--|N/C|N/C|N/C||
-|CANL|--||||To CAN Bus|
-|CANH|--||||To CAN Bus|
-|RS|--|GND|GND|GND|(*2)|
+|SN65HVD23x||ESP32|ESP32-S2/S3|ESP32-Cx/Hx|ESP32-P4||
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|D(CTX)|--|GPIO21|GPIO17|GPIO0|GPIO2|(*1)|
+|GND|--|GND|GND|GND|GND||
+|Vcc|--|3.3V|3.3V|3.3V|3.3V||
+|R(CRX)|--|GPIO22|GPIO18|GPIO1|GPIO3|(*1)|
+|Vref|--|N/C|N/C|N/C|N/C||
+|CANL|--|||||To CAN Bus|
+|CANH|--|||||To CAN Bus|
+|RS|--|GND|GND|GND|GND|(*2)|
 
 (*1) You can change using menuconfig. But it may not work with other GPIOs.  
 
